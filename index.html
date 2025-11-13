@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinity Shell — Osprey Terminal</title>
 
+  <style>
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      font-family: Consolas, monospace;
+      overflow: hidden;
+      color: #00eaff;
+    }
+
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #00eaff;
+    }
+
+    #terminal {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 90%;
+      height: 70%;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #00eaff;
+      padding: 10px;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+
+    #input-line {
+      width: 100%;
+      outline: none;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-family: Consolas, monospace;
+      font-size: 1rem;
+    }
+
+    #rogers-panel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f0f0f;
+      border: 1px solid #00eaff;
+      padding: 12px;
+      width: 320px;
+      height: 180px;
+      border-radius: 10px;
+      display: none;
+      color: #fff;
+      overflow-y: auto;
+    }
+
+    #rogers-open {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00eaff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="boot-screen">∞ Infinity Shell v1 — Booting…</div>
+
+  <div id="terminal">
+    <div id="output"></div>
+    <div>
+      <span style="color:#00eaff;">osprey@infinity:</span>
+      <input id="input-line" autofocus />
+    </div>
+  </div>
+
+  <button id="rogers-open">Rogers</button>
+
+  <div id="rogers-panel"></div>
+
+  <script src="shell.js"></script>
+  <script src="rogers.js"></script>
+
+  <script>
+    // Boot animation
+    setTimeout(() => {
+      document.getElementById("boot-screen").style.display = "none";
+      document.getElementById("terminal").style.display = "block";
+    }, 1800);
+  </script>
+
+</body>
+  </html>
+  
