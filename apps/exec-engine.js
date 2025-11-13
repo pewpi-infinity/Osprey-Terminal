@@ -112,6 +112,7 @@ window.Exec = {
     try {
       // Convert GitHub blob URLs to raw content URLs
       let fetchUrl = url;
+      if (fetchUrl.startsWith("https://github.com/") && fetchUrl.includes("/blob/")) {
       if (fetchUrl.includes("github.com") && fetchUrl.includes("/blob/")) {
         fetchUrl = fetchUrl.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/");
       }
@@ -141,15 +142,19 @@ window.Exec = {
         return this.readFile(args[0]) || "File not found.";
 
       case "write":
+        if (!args[0]) return "Usage: write <filename> <content>";
         if (!args[0]) return "Usage: write <path> <content>";
         this.writeFile(args[0], args.slice(1).join(" "));
         return "Written.";
 
       case "rm":
+        if (!args[0]) return "Usage: rm <filename>";
         this.deleteFile(args[0]);
         return "Removed.";
 
       case "mkdir":
+        if (!args[0]) return "Usage: mkdir <dirname>";
+        this.writeFile(args[0] + "/", "(dir)");
         if (!args[0]) return "Usage: mkdir <path>";
         this.writeFile(args[0].replace(/\/?$/, "/"), "(dir)");
         return "Directory created.";
@@ -166,6 +171,13 @@ window.Exec = {
         return this.execJS(code);
       }
 
+      case "run":
+        const script = this.readFile(args[0]);
+        if (!script) return "No such script.";
+        return this.execJS(script);
+
+      case "install":
+        if (!args[0]) return "Usage: install <github-url>";
       case "run": {
         const script = this.readFile(args[0]);
         if (!script) return "No such script.";
@@ -184,6 +196,16 @@ window.Exec = {
 
 /* Make Exec available after load. Expose the init promise so other scripts can await it. */
 document.addEventListener("DOMContentLoaded", () => {
+  try {
+    Exec.readyPromise = Exec.init();
+  } catch (e) {
+    if (typeof Rogers !== "undefined" && Rogers.say) {
+      Rogers.say("Exec Init Error: " + e);
+    } else {
+      console.error("Exec Init Error:", e);
+    }
+  }
+});
   const p = Exec.init();
   Exec.readyPromise = p;
   p.catch((e) => {
