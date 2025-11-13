@@ -43,7 +43,7 @@ const Exec = {
   },
 
   deleteFile(path) {
-    if (!path) return false;
+    if (!path || !this.fs[path]) return false;
     delete this.fs[path];
     return true;
   },
@@ -60,8 +60,8 @@ const Exec = {
         this.writeFile(args[0], args.slice(1).join(" "));
         return "Written.";
       case "rm":
-        this.deleteFile(args[0]);
-        return "Removed.";
+        if (!args[0]) return "Usage: rm <path>";
+        return this.deleteFile(args[0]) ? "Removed." : "File not found.";
       case "help":
         return "Commands: ls, cat <file>, write <path> <content>, rm <path>, run <file>";
       case "run": {
