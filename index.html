@@ -127,9 +127,20 @@
   </div>
 </div>
 
-<script src="shell.js"></script>
+<!-- Load core libs in the proper order:
+     1) rogers.js (Rogers global)
+     2) apps/intelligence-core.js (IntelligenceCore)
+     3) apps/exec-engine.js (Exec)  <-- previously missing
+     4) shell.js (UI that uses Exec)
+-->
+
+<!-- Optional: Pyodide for Python support (uncomment if you want Python enabled) -->
+<!-- <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script> -->
+
 <script src="rogers.js"></script>
 <script src="apps/intelligence-core.js"></script>
+<script src="apps/exec-engine.js"></script>
+<script src="shell.js"></script>
 
 </body>
 </html>
