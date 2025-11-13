@@ -1,3 +1,8 @@
+/* Infinity Shell — Osprey Terminal v1
+   Full Unified Command Engine
+   (C) Kris Watson Architecture
+*/
+
 const output = document.getElementById("output");
 const inputLine = document.getElementById("input-line");
 
@@ -6,15 +11,22 @@ function print(text) {
   output.scrollTop = output.scrollHeight;
 }
 
+function loadApp(path) {
+  const script = document.createElement("script");
+  script.src = path + "?v=" + Date.now();  // bust cache
+  document.body.appendChild(script);
+}
+
 const commands = {
   help() {
     print("Available commands:");
-    print(" • help — show commands");
-    print(" • ls — list directories");
+    print(" • help — list commands");
+    print(" • ls — list directory");
     print(" • clear — clear terminal");
-    print(" • rogers — open Rogers AI");
+    print(" • rogers — open Rogers AI panel");
     print(" • about — system info");
     print(" • open apps — list installed apps");
+    print(" • run quantum — launch Quantum Visualizer");
   },
 
   ls() {
@@ -32,13 +44,20 @@ const commands = {
 
   about() {
     print("Infinity Shell — Osprey Terminal v1");
-    print("Powered by browser JS, Cloudflare Pages, Kris Watson architecture.");
+    print("Self-writing architecture enabled.");
+    print("Quantum-ready. PewPi-ready.");
+    print("Powered by Kris Watson × Infinity OS.");
   },
 
   "open apps"() {
     print("Installed apps:");
-    print(" → (none yet) — you can add JS modules into /apps/");
+    print(" • quantum.js — Quantum Field Visualizer");
   },
+
+  "run quantum"() {
+    print("Launching Quantum Visualizer…");
+    loadApp("apps/quantum.js");
+  }
 };
 
 inputLine.addEventListener("keydown", e => {
@@ -55,4 +74,3 @@ inputLine.addEventListener("keydown", e => {
     inputLine.value = "";
   }
 });
-    
