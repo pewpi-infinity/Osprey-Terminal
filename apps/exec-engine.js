@@ -112,7 +112,7 @@ window.Exec = {
     try {
       // Convert GitHub blob URLs to raw content URLs
       let fetchUrl = url;
-      if (fetchUrl.includes("github.com") && fetchUrl.includes("/blob/")) {
+      if (fetchUrl.startsWith("https://github.com/") && fetchUrl.includes("/blob/")) {
         fetchUrl = fetchUrl.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/");
       }
 
