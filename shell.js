@@ -1,7 +1,8 @@
-/* Infinity Shell — Osprey Terminal v2
-   Complete Unified Command Engine
-   Natural-Language Ready
-   Kris Watson Architecture
+/* Infinity Shell — Osprey Terminal v3
+   Now aware of:
+   - Exec Engine
+   - Intelligence Core
+   - Rogers AI
 */
 
 const output = document.getElementById("output");
@@ -19,20 +20,26 @@ function loadApp(path) {
 }
 
 const commands = {
+
   help() {
     print("Available commands:");
     print(" • help — list commands");
-    print(" • ls — list directory");
-    print(" • clear — clear terminal");
+    print(" • ls — filesystem list");
+    print(" • exec — run hybrid engine");
+    print(" • clear — clear screen");
     print(" • rogers — open Rogers AI panel");
-    print(" • about — system info");
-    print(" • open apps — list installed apps");
+    print(" • intelligent — activate AI brain");
     print(" • run quantum — launch Quantum Visualizer");
-    print(" • intelligent — activate Intelligence Core");
+    print(" • open apps — list installed apps");
   },
 
   ls() {
-    print("os/  apps/  assets/  index.html  shell.js  rogers.js");
+    if (window.Exec && Exec.fs) {
+      const keys = Object.keys(Exec.fs);
+      print(keys.length ? keys.join("<br>") : "(empty)");
+    } else {
+      print("(filesystem not initialized)");
+    }
   },
 
   clear() {
@@ -44,16 +51,14 @@ const commands = {
     print("Opening Rogers AI panel…");
   },
 
-  about() {
-    print("Infinity Shell — Osprey Terminal v2");
-    print("Self-writing architecture enabled.");
-    print("Quantum-ready. PewPi-ready.");
-    print("Powered by Kris Watson × Infinity OS.");
-  },
-
-  "open apps"() {
-    print("Installed apps:");
-    print(" • quantum.js — Quantum Field Visualizer");
+  intelligent() {
+    if (window.IntelligenceCore) {
+      print("Activating Intelligence Core…");
+      IntelligenceCore.active = true;
+      IntelligenceCore.speak("Ready.");
+    } else {
+      print("Intelligence Core not loaded.");
+    }
   },
 
   "run quantum"() {
@@ -61,27 +66,51 @@ const commands = {
     loadApp("apps/quantum.js");
   },
 
-  intelligent() {
-    print("Intelligence Core activated. Speak your update.");
-    IntelligenceCore.speak("Listening for natural-language instructions…");
+  exec() {
+    if (!window.Exec) {
+      print("Exec Engine not loaded yet.");
+      return;
+    }
+    print("Exec Engine ready. Use commands like:");
+    print(" • write file.txt Hello");
+    print(" • cat file.txt");
+    print(" • python print(42)");
+    print(" • node console.log(\"hi\")");
+  },
+
+  "open apps"() {
+    print("Installed apps:");
+    print(" • intelligence-core.js — AI Brain");
+    print(" • exec-engine.js — Hybrid Execution Layer");
+    print(" • quantum.js — Quantum Visualizer");
   }
 };
 
-inputLine.addEventListener("keydown", e => {
+inputLine.addEventListener("keydown", async e => {
   if (e.key === "Enter") {
     const cmd = inputLine.value.trim();
     print(`<span style="color:#00eaff;">$</span> ${cmd}`);
 
-    // Command handler
+    // Check Exec Engine first for Linux-style commands
+    if (window.Exec && Exec.handle) {
+      const parts = cmd.split(" ");
+      const base = parts.shift();
+      const result = await Exec.handle(base, parts);
+      
+      if (result !== "Exec: Command not recognized.") {
+        print(result);
+        inputLine.value = "";
+        return;
+      }
+    }
+
+    // Fallback to built-in commands
     if (commands[cmd]) {
       commands[cmd]();
     } 
-    
-    // Language routing
     else if (window.IntelligenceCore) {
       IntelligenceCore.interpret(cmd);
-    }
-    
+    } 
     else {
       print(`Command not found: ${cmd}`);
     }
