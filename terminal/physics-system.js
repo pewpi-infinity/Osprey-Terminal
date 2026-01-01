@@ -213,8 +213,8 @@ window.TerminalPhysics = {
 };
 
 // Add animations
-const style = document.createElement('style');
-style.textContent = `
+const physicsStyle = document.createElement('style');
+physicsStyle.textContent = `
   @keyframes spark-flash {
     0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
     50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
@@ -227,7 +227,7 @@ style.textContent = `
     100% { opacity: 0; transform: translateY(-20px); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(physicsStyle);
 
 // Initialize on load
 if (document.readyState === 'loading') {

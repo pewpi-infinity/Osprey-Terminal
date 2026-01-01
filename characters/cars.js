@@ -94,11 +94,11 @@ window.CarsCharacter = {
 };
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+const carsStyle = document.createElement('style');
+carsStyle.textContent = `
   @keyframes honk-fade {
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(1.5) translateY(-20px); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(carsStyle);

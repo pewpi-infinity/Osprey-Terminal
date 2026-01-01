@@ -106,8 +106,8 @@ window.OspreyCore = {
 };
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+const ospreyStyle = document.createElement('style');
+ospreyStyle.textContent = `
   @keyframes osprey-circle {
     0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
     100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
@@ -119,7 +119,7 @@ style.textContent = `
     100% { transform: translateY(0); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(ospreyStyle);
 
 // Initialize on load
 if (document.readyState === 'loading') {

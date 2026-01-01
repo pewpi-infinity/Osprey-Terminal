@@ -98,12 +98,12 @@ window.MarioCharacter = {
 };
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+const marioStyle = document.createElement('style');
+marioStyle.textContent = `
   @keyframes mario-star-collect {
     0% { transform: scale(1) rotate(0deg); }
     50% { transform: scale(1.5) rotate(180deg); }
     100% { transform: scale(1) rotate(360deg); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(marioStyle);

@@ -111,8 +111,8 @@ window.MushroomsCharacter = {
 };
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+const mushroomsStyle = document.createElement('style');
+mushroomsStyle.textContent = `
   @keyframes mushroom-float-down {
     0% { top: -50px; opacity: 1; }
     80% { opacity: 1; }
@@ -129,7 +129,7 @@ style.textContent = `
     100% { opacity: 0; transform: translateY(-30px); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(mushroomsStyle);
 
 // Initialize on load
 if (document.readyState === 'loading') {

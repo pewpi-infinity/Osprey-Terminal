@@ -131,8 +131,8 @@ window.RoosterCharacter = {
 };
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+const roosterStyle = document.createElement('style');
+roosterStyle.textContent = `
   @keyframes rooster-crow {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(-10px); }
@@ -166,4 +166,4 @@ style.textContent = `
     100% { opacity: 0; transform: translateX(-50%) scale(1); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(roosterStyle);

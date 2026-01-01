@@ -100,8 +100,8 @@ Balanced equation:
 };
 
 // Add CSS for reaction animation
-const style = document.createElement('style');
-style.textContent = `
+const chemStyle = document.createElement('style');
+chemStyle.textContent = `
   @keyframes reaction-bubble {
     0% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.8; transform: scale(1.2); }
@@ -113,4 +113,4 @@ style.textContent = `
     100% { transform: translateX(-20px); }
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(chemStyle);
