@@ -211,7 +211,77 @@ Keep using commands to improve AI confidence.`;
   mongoose:auto       - Auto-execute AI suggestion
   mongoose:reset      - Reset AI patterns
 
+🔗 Multi-Repo Sync Commands:
+  mongoose:sync       - View repo sync status
+  mongoose:sync-now   - Force immediate sync
+  mongoose:repos      - List all legend repos
+  mongoose:production - View production aggregation
+
 💡 The AI learns from your usage and provides
    intelligent suggestions based on patterns.`;
+  },
+
+  // ADDITIVE: Repo sync commands
+  'mongoose:sync'() {
+    if (window.MongooseSync) {
+      return MongooseSync.formatStatusReport();
+    }
+    return '🦎 Mongoose Sync not loaded';
+  },
+
+  'mongoose:sync-now'() {
+    if (window.MongooseSync) {
+      MongooseSync.syncAll();
+      return `🦎 Starting multi-repo sync...
+
+📡 Syncing across all legend repos...
+⏳ This may take a moment...
+
+Use 'mongoose:sync' to check progress.`;
+    }
+    return '🦎 Mongoose Sync not loaded';
+  },
+
+  'mongoose:repos'() {
+    if (window.MongooseSync) {
+      let output = `🦎 Legend Repos in pewpi-infinity:\n\n`;
+      
+      for (const [name, repo] of Object.entries(MongooseSync.repos)) {
+        const status = repo.lastSync ? '✅' : '⏳';
+        output += `${status} ${repo.emoji} ${name}\n`;
+        output += `   ${repo.description}\n`;
+        if (repo.authority) {
+          output += `   Authority: ${repo.authority}\n`;
+        }
+        output += `\n`;
+      }
+      
+      return output;
+    }
+    return '🦎 Mongoose Sync not loaded';
+  },
+
+  'mongoose:production'() {
+    if (window.MongooseSync) {
+      const production = MongooseSync.getAggregatedProduction();
+      
+      let output = `🦎 Aggregated Production Report\n\n`;
+      output += `💎 Total Production: ${production.total} units\n\n`;
+      output += `📦 By Repository:\n\n`;
+      
+      const sorted = Object.entries(production.breakdown)
+        .sort(([,a], [,b]) => b.production - a.production);
+      
+      for (const [name, data] of sorted) {
+        if (data.production > 0) {
+          output += `${data.emoji} ${name}: ${data.production} units\n`;
+        }
+      }
+      
+      output += `\n💡 Production contributes to token valuation.`;
+      
+      return output;
+    }
+    return '🦎 Mongoose Sync not loaded';
   }
 };
