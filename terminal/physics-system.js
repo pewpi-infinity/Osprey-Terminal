@@ -169,7 +169,7 @@ window.TerminalPhysics = {
   startDischargeLoop() {
     setInterval(() => {
       if (this.capacitor.charge > 0) {
-        this.capacitor.charge = Math.max(0, this.capacitor.charge - this.dischargeRate);
+        this.capacitor.charge = Math.max(0, this.capacitor.charge - this.capacitor.dischargeRate);
         this.updateChargeIndicator();
       }
     }, 1000);
