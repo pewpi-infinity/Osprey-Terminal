@@ -1,0 +1,38 @@
+/* 🎵 Music Terminal Theme - Audio Style */
+
+body.terminal-music {
+  background: #1a0033;
+  color: #ff00ff;
+}
+
+.terminal-music {
+  background: #1a0033;
+  border: 4px solid #330066;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.terminal-music #output {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+.terminal-music .prompt::before {
+  content: "🎵 ";
+}
+
+.terminal-music #input-line {
+  background: #330066;
+  color: #ff00ff;
+  border: 2px solid #660099;
+}
+
+.input-area-music {
+  background: #330066;
+  border-top: 4px solid #660099;
+}
+
+.terminal-music #status {
+  background: #4d0099;
+  color: #ff66ff;
+  border-top: 4px solid #330066;
+}

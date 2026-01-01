@@ -1,0 +1,43 @@
+/* ⚛️ Quantum Terminal Theme - Particle Physics Style */
+
+body.terminal-quantum {
+  background: #000015;
+  color: #a78bfa;
+}
+
+.terminal-quantum {
+  background: #000015;
+  border: 4px solid #4c1d95;
+  font-family: 'Fira Code', monospace;
+}
+
+.terminal-quantum #output {
+  color: #a78bfa;
+  animation: quantum-flicker 3s ease-in-out infinite;
+}
+
+.terminal-quantum .prompt::before {
+  content: "⚛️ ";
+}
+
+.terminal-quantum #input-line {
+  background: #1e1b4b;
+  color: #c4b5fd;
+  border: 2px solid #4c1d95;
+}
+
+.input-area-quantum {
+  background: #1e1b4b;
+  border-top: 4px solid #4c1d95;
+}
+
+.terminal-quantum #status {
+  background: #1e1b4b;
+  color: #c4b5fd;
+  border-top: 4px solid #4c1d95;
+}
+
+@keyframes quantum-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}

@@ -1,0 +1,37 @@
+/* ⚽ Sports Terminal Theme - Athletic Style */
+
+body.terminal-sports {
+  background: #0d1b2a;
+  color: #ffd700;
+}
+
+.terminal-sports {
+  background: #0d1b2a;
+  border: 4px solid #1b263b;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.terminal-sports #output {
+  color: #ffd700;
+}
+
+.terminal-sports .prompt::before {
+  content: "⚽ ";
+}
+
+.terminal-sports #input-line {
+  background: #1b263b;
+  color: #ffd700;
+  border: 2px solid #415a77;
+}
+
+.input-area-sports {
+  background: #1b263b;
+  border-top: 4px solid #415a77;
+}
+
+.terminal-sports #status {
+  background: #415a77;
+  color: #ffd700;
+  border-top: 4px solid #1b263b;
+}

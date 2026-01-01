@@ -1,0 +1,49 @@
+/* 🧪 Chemistry Terminal Theme - Lab Style */
+
+body.terminal-chemistry {
+  background: #1a1a2e;
+  color: #e8e8e8;
+}
+
+.terminal-chemistry {
+  background: #1a1a2e;
+  border: 4px solid #16213e;
+  font-family: 'Georgia', serif;
+}
+
+.terminal-chemistry #output {
+  color: #e8e8e8;
+}
+
+.terminal-chemistry .prompt::before {
+  content: "🧪 ";
+}
+
+.terminal-chemistry #input-line {
+  background: #16213e;
+  color: #e8e8e8;
+  border: 2px solid #0f3460;
+  font-family: 'Georgia', serif;
+}
+
+.input-area-chemistry {
+  background: #16213e;
+  border-top: 4px solid #0f3460;
+}
+
+.terminal-chemistry #status {
+  background: #0f3460;
+  color: #94bbe9;
+  border-top: 4px solid #16213e;
+}
+
+/* Chemistry reaction effects */
+.terminal-chemistry .reaction {
+  color: #00d4ff;
+  animation: chem-bubble 2s ease infinite;
+}
+
+@keyframes chem-bubble {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; transform: translateY(-2px); }
+}
