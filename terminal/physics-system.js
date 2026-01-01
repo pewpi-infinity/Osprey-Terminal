@@ -116,14 +116,13 @@ window.TerminalPhysics = {
 
   // Enter discharges and executes
   onEnter(command) {
-    const spark = this.capacitor.discharge();
+    const spark = this.discharge();
     const executionSpeed = spark * this.multiplier;
     
     // Visual spark effect
     this.showSpark();
     
     // Reset for next command
-    this.capacitor.charge = 0;
     this.multiplier = 1;
     this.updateChargeIndicator();
     
