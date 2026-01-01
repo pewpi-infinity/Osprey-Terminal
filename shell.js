@@ -72,6 +72,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       print("🦅 Osprey Commands:");
       print(" • osprey:fly — make osprey fly");
       print(" • osprey:message-mario — send message to Mario");
+      print("");
+      print("🧱 Token Commands:");
+      print(" • token:value — show real-time token value");
+      print(" • token:metrics — view activity metrics");
+      print(" • token:breakdown — detailed value breakdown");
+      print(" • token:usd — USD conversion reference");
+      print("");
+      print("🦎 Mongoose AI Commands:");
+      print(" • mongoose:status — AI reasoning report");
+      print(" • mongoose:suggest — get AI suggestion");
+      print(" • mongoose:theme — AI theme recommendation");
+      print(" • mongoose:help — full mongoose commands");
     },
 
     ls() {
@@ -192,6 +204,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         print(OspreyCommands[base](args));
         inputLine.value = "";
         return;
+      }
+      // ADDITIVE: Mongoose AI commands
+      if (window.MongooseCommands && MongooseCommands[base]) {
+        // Record command in Mongoose AI for pattern learning
+        if (window.MongooseOS) {
+          MongooseOS.analyzeCommand(base, args);
+        }
+        print(MongooseCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+
+      // ADDITIVE: Record command execution for token valuation and AI learning
+      if (window.TokenValuation) {
+        TokenValuation.recordCommand(base);
+      }
+      if (window.MongooseOS) {
+        MongooseOS.analyzeCommand(base, args);
       }
 
       // Check Exec Engine for Linux-style commands
