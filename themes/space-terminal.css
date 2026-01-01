@@ -1,0 +1,38 @@
+/* 🚀 Space Terminal Theme - Cosmic Style */
+
+body.terminal-space {
+  background: #000000;
+  color: #ffffff;
+}
+
+.terminal-space {
+  background: #000000;
+  border: 4px solid #1a1a2e;
+  font-family: 'Orbitron', monospace;
+}
+
+.terminal-space #output {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.terminal-space .prompt::before {
+  content: "🚀 ";
+}
+
+.terminal-space #input-line {
+  background: #1a1a2e;
+  color: #ffffff;
+  border: 2px solid #16213e;
+}
+
+.input-area-space {
+  background: #1a1a2e;
+  border-top: 4px solid #16213e;
+}
+
+.terminal-space #status {
+  background: #16213e;
+  color: #94bbe9;
+  border-top: 4px solid #1a1a2e;
+}

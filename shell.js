@@ -37,6 +37,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       print(" • intelligent — activate AI brain");
       print(" • run quantum — launch Quantum Visualizer");
       print(" • open apps — list installed apps");
+      print("");
+      print("🎨 Theme Commands:");
+      print(" • theme [name] — switch theme");
+      print(" • theme:next — next theme");
+      print(" • theme:prev — previous theme");
+      print(" • theme:list — list all themes");
+      print("");
+      print("🍄 Mario Commands:");
+      print(" • mario:jump [dir] — jump to directory");
+      print(" • mario:power-up — boost performance");
+      print(" • mario:coin — collect achievement");
+      print("");
+      print("⚡ Electronics Commands:");
+      print(" • elec:signal [freq] — generate signal");
+      print(" • elec:scope — oscilloscope view");
+      print(" • elec:build — build circuit");
+      print("");
+      print("🧪 Chemistry Commands:");
+      print(" • chem:mix <A> <B> — mix compounds");
+      print(" • chem:balance <eq> — balance equation");
+      print(" • chem:react — run reaction");
+      print("");
+      print("🤖 Robotics Commands:");
+      print(" • robot:program — program robot");
+      print(" • robot:auto — run automation");
+      print(" • robot:sensors — check sensors");
+      print("");
+      print("🧱 Token Commands:");
+      print(" • token:apply <formula> — apply token");
+      print(" • token:combine <A> <B> — combine tokens");
+      print(" • token:value — show token value");
+      print("");
+      print("🦅 Osprey Commands:");
+      print(" • osprey:fly — make osprey fly");
+      print(" • osprey:message-mario — send message to Mario");
+      print("");
+      print("🧱 Token Commands:");
+      print(" • token:value — show real-time token value");
+      print(" • token:metrics — view activity metrics");
+      print(" • token:breakdown — detailed value breakdown");
+      print(" • token:usd — USD conversion reference");
+      print("");
+      print("🦎 Mongoose AI Commands:");
+      print(" • mongoose:status — AI reasoning report");
+      print(" • mongoose:suggest — get AI suggestion");
+      print(" • mongoose:theme — AI theme recommendation");
+      print(" • mongoose:help — full mongoose commands");
     },
 
     ls() {
@@ -97,15 +144,91 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (e.key === "Enter") {
       const cmd = inputLine.value.trim();
       if (!cmd) return;
-      print(`<span style="color:#00eaff;">$</span> ${cmd}`);
+      
+      // Get theme-specific prompt
+      const prompt = window.TerminalEngine ? TerminalEngine.getPrompt() : '$';
+      print(`<span style="color:#00eaff;">${prompt}</span> ${cmd}`);
 
-      // Check Exec Engine first for Linux-style commands
+      // Add to joystick history
+      if (window.JoystickControls) {
+        JoystickControls.addToHistory(cmd);
+      }
+
+      // Add to terminal engine history
+      if (window.TerminalEngine) {
+        TerminalEngine.saveToHistory(TerminalEngine.currentTheme, cmd);
+      }
+
+      // Parse command
+      const parts = cmd.split(" ");
+      const base = parts[0];
+      const args = parts.slice(1);
+
+      // Check Terminal Engine commands first (theme switching)
+      if (window.TerminalEngine) {
+        const result = TerminalEngine.handleCommand(base, args);
+        if (result !== null) {
+          print(result);
+          inputLine.value = "";
+          return;
+        }
+      }
+
+      // Check theme-specific commands
+      if (window.MarioCommands && MarioCommands[base]) {
+        print(MarioCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      if (window.ElectronicsCommands && ElectronicsCommands[base]) {
+        print(ElectronicsCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      if (window.ChemistryCommands && ChemistryCommands[base]) {
+        print(ChemistryCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      if (window.RoboticsCommands && RoboticsCommands[base]) {
+        print(RoboticsCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      if (window.TokenCommands && TokenCommands[base]) {
+        print(TokenCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      if (window.OspreyCommands && OspreyCommands[base]) {
+        print(OspreyCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+      // ADDITIVE: Mongoose AI commands
+      if (window.MongooseCommands && MongooseCommands[base]) {
+        // Record command in Mongoose AI for pattern learning
+        if (window.MongooseOS) {
+          MongooseOS.analyzeCommand(base, args);
+        }
+        print(MongooseCommands[base](args));
+        inputLine.value = "";
+        return;
+      }
+
+      // ADDITIVE: Record command execution for token valuation and AI learning
+      if (window.TokenValuation) {
+        TokenValuation.recordCommand(base);
+      }
+      if (window.MongooseOS) {
+        MongooseOS.analyzeCommand(base, args);
+      }
+
+      // Check Exec Engine for Linux-style commands
       if (window.Exec && Exec.handle) {
-        const parts = cmd.split(" ");
-        const base = parts.shift();
         try {
-          const result = await Exec.handle(base, parts);
-          if (result !== "Exec: Command not recognized.") {
+          const result = await Exec.handle(base, args);
+          if (result !== "Unknown command. Try 'help'") {
             print(result);
             inputLine.value = "";
             return;

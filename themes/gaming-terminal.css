@@ -1,0 +1,57 @@
+/* 🎮 Gaming Terminal Theme - Retro Arcade Style */
+
+body.terminal-gaming {
+  background: #0f0f23;
+  color: #00ff41;
+}
+
+.terminal-gaming {
+  background: #0f0f23;
+  border: 4px solid #ff00ff;
+  font-family: 'Press Start 2P', monospace;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.terminal-gaming #output {
+  color: #00ff41;
+  text-shadow: 0 0 5px #00ff41;
+}
+
+.terminal-gaming .prompt::before {
+  content: "🎮 ";
+}
+
+.terminal-gaming #input-line {
+  background: #1a1a3e;
+  color: #00ff41;
+  border: 2px solid #ff00ff;
+}
+
+.input-area-gaming {
+  background: #1a1a3e;
+  border-top: 4px solid #ff00ff;
+}
+
+.terminal-gaming #status {
+  background: #16162e;
+  color: #00ff41;
+  border-top: 4px solid #ff00ff;
+}
+
+/* Retro CRT effect */
+.terminal-gaming::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}

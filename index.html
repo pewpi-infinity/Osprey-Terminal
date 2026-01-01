@@ -72,14 +72,65 @@ body:not(.pewpi-live)>*:not(#pewpi-gate){filter:blur(6px);pointer-events:none}
   </div>
 </div>
 
+<!-- Theme CSS files -->
+<link rel="stylesheet" href="themes/mario-terminal.css">
+<link rel="stylesheet" href="themes/electronics-terminal.css">
+<link rel="stylesheet" href="themes/chemistry-terminal.css">
+<link rel="stylesheet" href="themes/robotics-terminal.css">
+<link rel="stylesheet" href="themes/quantum-terminal.css">
+<link rel="stylesheet" href="themes/sports-terminal.css">
+<link rel="stylesheet" href="themes/music-terminal.css">
+<link rel="stylesheet" href="themes/space-terminal.css">
+<link rel="stylesheet" href="themes/nature-terminal.css">
+<link rel="stylesheet" href="themes/art-terminal.css">
+<link rel="stylesheet" href="themes/gaming-terminal.css">
+
 <!-- Script load order (Pyodide included so python command should work) -->
 <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+
+<!-- Terminal Engine Scripts -->
+<script src="terminal/osprey-core.js"></script>
+<script src="terminal/terminal-engine.js"></script>
+<script src="terminal/physics-system.js"></script>
+
+<!-- Character Scripts -->
+<script src="characters/mario.js"></script>
+<script src="characters/luigi.js"></script>
+<script src="characters/cars.js"></script>
+<script src="characters/mushrooms.js"></script>
+<script src="characters/osprey.js"></script>
+<script src="characters/rooster.js"></script>
+
+<!-- Theme Command Scripts -->
+<script src="commands/theme-commands/mario-commands.js"></script>
+<script src="commands/theme-commands/electronics-commands.js"></script>
+<script src="commands/theme-commands/chemistry-commands.js"></script>
+<script src="commands/theme-commands/robotics-commands.js"></script>
+<script src="commands/theme-commands/token-commands.js"></script>
+<script src="commands/theme-commands/mongoose-commands.js"></script>
+
+<!-- ADDITIVE: Token Valuation Engine -->
+<script src="terminal/token-valuation.js"></script>
+
+<!-- ADDITIVE: Token Machine Emitter -->
+<script src="terminal/token-machine.js"></script>
+
+<!-- ADDITIVE: Mongoose.OS AI Firmware -->
+<script src="mongoose/mongoose-os.js"></script>
+
+<!-- ADDITIVE: Mongoose Multi-Repo Sync -->
+<script src="mongoose/mongoose-sync.js"></script>
+
+<!-- Joystick Controls -->
+<script src="joystick/controls.js"></script>
+
+<!-- Existing Scripts -->
 <script src="rogers.js"></script>
 <script src="apps/intelligence-core.js"></script>
 <script src="apps/exec-engine.js"></script>
 
 <!-- Debug script to print statuses to the page -->
-<script src="apps/exec-debug.js"></script>
+<script src="apps/apps/exec-debug.js"></script>
 
 <!-- Shell UI -->
 <script src="shell.js"></script>
